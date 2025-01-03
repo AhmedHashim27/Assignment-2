@@ -1,33 +1,33 @@
-name: Auto-Contribution
+# name: Auto-Contribution
 
-on:
-  schedule:
-    # Run every 5 minutes (GitHub Actions minimum interval)
-    - cron: '*/5 * * * *'
-  workflow_dispatch: # Allows manual trigger for testing
+# on:
+#   schedule:
+#     # Run every 5 minutes (GitHub Actions minimum interval)
+#     - cron: '*/5 * * * *'
+#   workflow_dispatch: # Allows manual trigger for testing
 
-jobs:
-  update-file:
-    runs-on: ubuntu-latest
+# jobs:
+#   update-file:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Checkout Repository
+#         uses: actions/checkout@v3
 
-      - name: Set Up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
+#       - name: Set Up Python
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: '3.x'
 
-      - name: Run Script
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          python -c "
-          from github import Github;
-          import os;
-          repo = Github(os.getenv('GITHUB_TOKEN')).get_repo('AhmedHashim27/Assignment-2');
-          file = repo.get_contents('README.md');
-          content = file.decoded_content.decode('utf-8') + '\\n';
-          repo.update_file(file.path, 'Add empty line', content, file.sha);
-          "
+#       - name: Run Script
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         run: |
+#           python -c "
+#           from github import Github;
+#           import os;
+#           repo = Github(os.getenv('GITHUB_TOKEN')).get_repo('AhmedHashim27/Assignment-2');
+#           file = repo.get_contents('README.md');
+#           content = file.decoded_content.decode('utf-8') + '\\n';
+#           repo.update_file(file.path, 'Add empty line', content, file.sha);
+#           "
